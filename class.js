@@ -1,5 +1,29 @@
 console.log("------- class ---------");
 
+class Animal { 
+  constructor(name) {
+    this.name = name;
+  }
+  
+  speak() {
+    console.log(this.name + ' makes a noise.');
+  }
+}
+
+class Dog extends Animal {
+  speak() {
+    console.log(this.name + ' barks.');
+  }
+}
+
+var d = new Dog('Mitzie');
+d.speak(); // Mitzie barks.
+
+
+
+
+
+
 class Cars {
     constractor(options){
         //super(optiopns)
@@ -19,13 +43,36 @@ class Toyota extends Cars{
     honk(){
         return 'beep';
     }
+    color(){
+        var l = this.color + " color"
+        return l;
+    }
 }
 
 const toyota = new Toyota({color:'red', title:'daily drive'});
 var ttt = toyota.honk();
 var tttD= toyota.drive();
+var tttDD= toyota.color();
 console.log(ttt);
 console.log(tttD);
-//console.log(toyota.title);
+console.log(tttDD);
+
+
+class Polygon {
+  constructor(height, width) {
+    this.name = 'Polygon';
+    this.height = height;
+    this.width = width;
+  }
+}
+
+class Square extends Polygon {
+  constructor(length) {
+    super(length, length);
+    this.name = 'Square';
+  }
+}
+
+
 
 
