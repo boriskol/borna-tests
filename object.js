@@ -74,10 +74,6 @@ var myCar = new CarA();
 myCar.drive()
 
 
-
-
-
-
 var Somthing = {
 	cool: function(){
 		this.greeting = "Hello World";
@@ -100,6 +96,19 @@ Another.greeting;
 Another.count;
 
 
+var anotherObject = {
+	a:2;
+}
+var myObject = Object.create(anotherObject)
+anotherObject.a //2
+myObject.a //2
+
+anotherObject.hasOwnProperty("a")
+myObject.hasOwnProperty("a")
+
+myObject.a++
+anotherObject.a //2
+myObject.a //3
 
 
 
