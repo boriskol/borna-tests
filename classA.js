@@ -46,6 +46,58 @@ console.log(Car.drive())
 
 
 
+function Foo(name){
+	this.name = name;
+}
+Foo.prototype.myName = function(){
+	return this.name;
+}
+function Bar(name, lable){
+	Foo.call(this, name)
+	this.lable = lable
+}
+
+Bar.prototype = Object.create(Foo.prototype)
+//es6+
+// Object.setPrototypeOf(Foo.prototype, Bar.prototype)
+
+Bar.prototype.myLabel = function(){
+	return this.lable
+}
+
+var a = new Bar("a", "object a")
+
+a.myName //a
+a.myLabel //object a
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
