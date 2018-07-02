@@ -44,8 +44,6 @@ var Car = mixin(Vehicle, {
 
 console.log(Car.drive())
 
-
-
 function Foo(name){
 	this.name = name;
 }
@@ -59,7 +57,7 @@ function Bar(name, lable){
 
 Bar.prototype = Object.create(Foo.prototype)
 //es6+
-// Object.setPrototypeOf(Foo.prototype, Bar.prototype)
+//Object.setPrototypeOf(Foo.prototype, Bar.prototype)
 
 Bar.prototype.myLabel = function(){
 	return this.lable
@@ -69,6 +67,30 @@ var a = new Bar("a", "object a")
 
 a.myName //a
 a.myLabel //object a
+
+
+function Mammal() {
+  this.isMammal = 'yes';
+}
+
+function MammalSpecies(sMammalSpecies) {
+  this.species = sMammalSpecies;
+}
+
+MammalSpecies.prototype = new Mammal();
+MammalSpecies.prototype.constructor = MammalSpecies;
+
+var oCat = new MammalSpecies('Felis');
+
+console.log(oCat.isMammal); // 'yes'
+
+function Animal() {
+  this.breathing = 'yes';
+}
+
+Object.appendChain(oCat, new Animal());
+
+console.log(oCat.breathing); // 'yes'
 
 
 
