@@ -6,7 +6,7 @@ function addNumbers(...numbers){
     }, 0);
 
 
-console.log(addNumbers(1,2,3,4,5,6,7));
+console.log(addNumbers(1,2,3,4,5));
 
 
 const defaultColors = ['red', 'green'];

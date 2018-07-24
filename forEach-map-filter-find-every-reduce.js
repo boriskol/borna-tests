@@ -21,7 +21,6 @@ console.log(sum);
 function adder(number) {
     sum += number;
 }
-
 numbers.forEach(adder);
 console.log(sum);
 
@@ -31,11 +30,9 @@ var posts = [
     { id: 52, title: 'Code Refactor City' },
     { id: 105, title: 'The Brightest Ruby' }
 ];
-
 function handlePosts(post) {
     console.log(post.title);
 }
-
 posts.forEach(handlePosts);
 
 var images = [
@@ -44,12 +41,10 @@ var images = [
     { height: 54, width: 32 }
 ];
 var areas = [];
-
 function calculate(image) {
     var area = image.height * image.width;
     areas.push(area)
 }
-
 images.forEach(calculate);
 console.log(areas);
 
@@ -58,13 +53,10 @@ console.log(areas);
 //map
 console.log("-------------------------map------------------------------------");
 var numbers = [1, 2, 3, 4, 5];
-
 var doubleNumbes = [];
-
 var double = numbers.map(function(number) {
     return number * 2;
 });
-
 console.log(double);
 
 var titles = posts.map(function(post) {
@@ -82,33 +74,38 @@ var trips = [
     { distance: 90, time: 50 },
     { distance: 59, time: 25 }
 ];
-
 var speeds = trips.map(function(trip) {
-    return trip.distance + "," + trip.time;
+    //return trip.distance + "," + trip.time;
+    return `${trip.distance}, ${trip.time}`;
 });
 console.log(speeds);
+let mmm = speeds.map(([x,y]) =>{
+   // return {x:x, y:y};
+    return {x, y};
+});
+console.log(mmm);
+
 
 var paints = [{ color: 'red', type: 'veg', quantity: 0, price: 1 },
     { color: 'blue', type: 'not', quantity: 10, price: 15 },
     { color: 'yellow', type: 'veg', quantity: 13, price: 8 }
 ];
-
 function pluck(array, property) {
-
     var propertyA = array.map(function(paint) {
         //console.log(property);
         if (paint.hasOwnProperty(property)) {
             return paint.color;
         }
     });
-
     return propertyA;
 }
 var a = pluck(paints, 'color');
 console.log(a);
 
+
+
 ///filter
-console.log("---filter----");
+console.log("------------------------------filter-------------------------------------");
 var vegetable = paints.filter(function(paint) {
     return paint.type === "veg"
 });
@@ -119,19 +116,23 @@ var vegetablePrice = paints.filter(function(paint) {
 });
 console.log(vegetablePrice);
 
+var postsB = [
+    { id: 2, title: 'Daily JBorna' },
+    { id: 23, title: 'Daily JS News' },
+    { id: 52, title: 'Code Refactor City' },
+    { id: 105, title: 'The Brightest Ruby' }
+];
 var postB = { id: 2, title: 'Daily JBorna' };
-
+var postC = { id: 1, title: 'Daily J' };
 function commentsPost(pos, posts) {
     return posts.filter(function(post) {
-        return post.id === postB.id;
+        return post.id === pos.id;
     });
 };
-
-var b = commentsPost(postB, posts);
+var b = commentsPost(postB, postsB);
 console.log(b);
 
 var numbersA = [15, 25, 35, 45, 55, 65, 75, 85, 95];
-
 var filteredNumbers = numbersA.filter(function(number) {
     return number > 50
 });
@@ -150,11 +151,11 @@ var filteredUsers = users.filter(function(user) {
 });
 console.log(filteredUsers);
 
-var numbersB = [10, 20, 30];
 
+var numbersB = [10, 20, 30];
 function reject(array, iteratorFunction) {
     var lessThanFifteen = array.filter(function(number) {
-        if (number < 15) {
+        if (number < iteratorFunction) {
             return number
         }
     });
@@ -163,38 +164,31 @@ function reject(array, iteratorFunction) {
 var c = reject(numbersB, 15);
 console.log(c);
 
-console.log("---find-----");
-
+console.log("------------------------------------find-------------------------------------");
 var user = users.find(function(user) {
     return user.name === "Borna"
 });
-
 console.log(user);
 
 function Car(model) {
     this.model = model;
 }
-
 var cars = [
     new Car("Buick"),
     new Car("Camaro"),
     new Car("Focus")
 ];
-
 var cc = cars.find(function(car) {
     return car.model === 'Focus';
 });
-
 console.log(cc);
 
 var comment = { id: 2, title: 'Daily JBorna' };
-
 function postForComments(posts, comment) {
     return posts.find(function(post) {
         return post.id === comment.id;
     });
 }
-
 var e = postForComments(posts, comment);
 console.log(e);
 
@@ -203,19 +197,15 @@ var accounts = [
     { balance: 12 },
     { balance: 0 }
 ];
-
 var account;
-
 function count(accounts) {
-
-    var b = accounts.find(function(account) {
-        return account.balance === 12
+    
+    var b = accounts.find(function(bal) {
+        return bal.balance === 12
     })
-
     account = b;
     return account
 }
-
 count(accounts);
 console.log(count(accounts));
 
@@ -225,20 +215,18 @@ var ladders = [
     { id: 4, height: 55 },
     { id: 4, height: 75 }
 ];
-
 function findWhere(array, criteria) {
     var a = array.find(function(ar) {
         if (ar.height === criteria) {
             return ar
         }
-
     });
     return a;
 }
 findWhere(ladders, 25);
 console.log(findWhere(ladders, 25));
 
-console.log("------ every and some ---------");
+console.log("--------------------------------------- every and some ----------------------------------");
 
 var every = ladders.every(function(ladder) {
     return ladder.height > 15 && ladder.height < 100;
@@ -295,7 +283,7 @@ var inProgress = requests.some(function(req) {
 });
 console.log(inProgress);
 
-console.log("------ reduce ---------");
+console.log("-------------------------------------------------- reduce ----------------------------------");
 
 var numbersC = [10, 20, 30];
 var sum = 0;
@@ -310,7 +298,6 @@ var primaryColors = [
     { color: 'yelow' },
     { color: 'blue' }
 ];
-
 var pm = primaryColors.reduce(function(previous, primaryColors) {
     previous.push(primaryColors.color);
     return previous;
@@ -328,7 +315,6 @@ function balacedParens(string) {
         if (char === ")") {
             return --previous;
         }
-
         return previous;
     }, 0)
 };
@@ -337,14 +323,13 @@ function balacedParens(string) {
 
 if (balacedParens(')(')) {
     console.log(balacedParens(')('));
-
 } else {
     console.log("false");
 }
 
 var trips = [{ distance: 34 }, { distance: 12 }, { distance: 1 }];
 var sum = 0;
-var totalDistance = trips.reduce(function(sas, s) {
+var totalDistance = trips.reduce(function(returnValue, s) {
     return sum += s.distance;
 }, 0);
 console.log(sum);
@@ -371,7 +356,6 @@ var desks = [
 }*/
 
 function standingSitting(array) {
-
     return array.reduce(function(r, a) {
         var standing = array.filter(function(desk) {
             return desk.type === 'standing';
@@ -379,19 +363,15 @@ function standingSitting(array) {
         var sitting = array.filter(function(desk) {
             return desk.type === 'sitting';
         });
-
         //r.push({sitting: standing.length ,standing:sitting.length})
-
         return { sitting: standing.length, standing: sitting.length };
     }, { sitting: 0, standing: 0 });
 }
 var st = standingSitting(desks);
-
 console.log(st);
 
 
-var numbersD = [1, 5, 1, 2, 3, 4, 4];
-
+var numbersD = [1, 5, 1, 2, 3, 4, 4, 10, 20, 10, 21];
 function unique(array) {
     return array.reduce(function(a, b) {
         var isIn = a.find(function(element) {
@@ -403,10 +383,16 @@ function unique(array) {
         return a;
     }, []);
 }
-
 var ret = unique(numbersD);
-ret.sort();
+ret.sort(function(a, b) {
+  return a - b;
+});
 console.log(ret);
+
+
+
+
+
 
 
 

@@ -29,8 +29,6 @@ function fileSummary(file){
 function fileSummary({ name, extension, size }, { color }) {
     return `${color} The file ${name}.${extension} is of size ${size}`;
 };
-
-
 var vvv = fileSummary(savedFiled, { color: 'red' });
 console.log(vvv);
 
@@ -40,7 +38,6 @@ const companies = [
     'Uber',
     'lola'
 ];
-
 const [nameS, nameSS, ...rest] = companies;
 console.log(nameS + ", " + nameSS + ", " + rest);
 
@@ -50,7 +47,6 @@ const companiesS = [
     { nameS: 'ava', locationS: 'ger' },
     { nameS: 'lot', locationS: 'cro' }
 ];
-
 const [{locationS}] = companiesS;
 console.log(locationS);
 
@@ -58,9 +54,8 @@ console.log(locationS);
 const Google = {
     locationZ: ['usa','ger', 'cro', 'it']
 }
-
 const {locationZ: [ locationQ, ...restQ ]} = Google;
-console.log(locationQ+", "+restQ);
+console.log(locationQ + "- " +restQ);
 
 
 const points = [
@@ -84,4 +79,9 @@ const classes = [
 const classesAsObject = classes.map(([subject,time,teacher])=>{
     return {subject, time, teacher}
 });
-console.log(classesAsObject);
+console.log(classesAsObject[0].subject);
+
+
+
+
+
