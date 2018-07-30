@@ -9,7 +9,6 @@ function mixin(sourceObj, targetObj){
 	return targetObj
 }
 
-
 var Vehicle = {
 	engines: 1,
 	ignition: function(){

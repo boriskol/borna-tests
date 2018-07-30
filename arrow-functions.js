@@ -6,25 +6,25 @@ var elements = [
 ];
 
 elements.map(function(element ) { 
-  return element .length; 
+  return element.length; 
 }); // [8, 6, 7, 9]
 
 elements.map(element => {
   return element.length;
 }); // [8, 6, 7, 9]
-
 materials.map(({ length }) => length); // [8, 6, 7, 9]
 
 
 console.log("------- arrow functions ---------");
-
+var a = [1,2,3,4,5]
+a = a.map( v => v * 2)
+console.log(a)
 //const add = function(a,b){
     //return a+b;
 //}
 const add = (a,b) => {
     return a+b;
 }
-
 //implicit return of function
 const addSomeAsUbove = (a,b) => { return a+b};
 //implicit return of function
@@ -54,13 +54,12 @@ const team = {
         }.bind(this));
     }
 };
-
 const teamA = {
     members: ["Jane", "Bill"],
     teamName: "Super Squad",
     teamSummary: function(){
         var self = this;
-        return this.members.map(function(member){
+        return self.members.map(function(member){
             return `${member} is on team ${self.teamName}`;
         });
     }
@@ -76,6 +75,18 @@ const teamB = {
         });
     }
 };
+const teamC = {
+    members: ["Jane", "Bill"],
+    teamName: "Super Squad",
+    teamSummary: =>{
+        //var self = this;
+        return this.members.map((member) =>{
+            return `${member} is on team ${this.teamName}`;
+        });
+    }
+};
+var tc = teamC.teamSummary();
+console.log(tc + "tc");
 
 var bbb = team.teamSummary();
 console.log(bbb);

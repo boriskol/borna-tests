@@ -4,7 +4,7 @@
 console.log("forEach-map-filter-find-every-reduce");
 
 /// forEach
-console.log("---forEach----");
+console.log("----------------------------------------------------------forEach----");
 var colors = ['red', 'blue', 'green'];
 
 colors.forEach(function(color) {
@@ -249,6 +249,7 @@ var someA = names.some(function(name) {
     return name.length > 5;
 });
 console.log(someA);
+
 /*
 function Field(value){
     this.value = value;

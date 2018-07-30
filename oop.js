@@ -74,6 +74,11 @@ class UserCreator {
 	}
 	increment (){
 		this.score++;
+		console.log(this.score)
+	}
+	decrement (){
+		this.score--;
+		console.log(this.score)
 	}
 	login (){
 		console.log("login");

@@ -4,8 +4,6 @@ function addNumbers(...numbers){
     return numbers.reduce((sum, number)=>{
         return sum + number;
     }, 0);
-
-
 console.log(addNumbers(1,2,3,4,5));
 
 
@@ -26,7 +24,6 @@ function validateShopingList(...items){
     }
     return items;
 }
-
 console.log(validateShopingList('oranges', 'bread', 'eggs') );
 
 
