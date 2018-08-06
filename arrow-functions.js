@@ -75,18 +75,7 @@ const teamB = {
         });
     }
 };
-const teamC = {
-    members: ["Jane", "Bill"],
-    teamName: "Super Squad",
-    teamSummary: =>{
-        //var self = this;
-        return this.members.map((member) =>{
-            return `${member} is on team ${this.teamName}`;
-        });
-    }
-};
-var tc = teamC.teamSummary();
-console.log(tc + "tc");
+
 
 var bbb = team.teamSummary();
 console.log(bbb);
