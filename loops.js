@@ -34,6 +34,15 @@ for({x: o.a} of [ {x:1}, {x:2}, {x:3}]){
 }
 
 
+for(var i = 0; i <  5; i++){
+ let j = i; 
+ console.log(j)
+}
+for(var i = 0; i <  5; i++){ 
+	(function(j){
+		console.log(j)
+	})(i)
+}
 
 
 
