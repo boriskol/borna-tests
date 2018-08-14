@@ -102,6 +102,25 @@ function pluck(array, property) {
 var a = pluck(paints, 'color');
 console.log(a);
 
+// An array of objects.
+var myFriends = [
+  { name: "John", surname: "Smith", age: 52},  
+  { name: "Sarah", surname: "Smith", age: 49},  
+  { name: "Michael", surname: "Jones", age: 46},  
+  { name: "Garry", surname: "Thomas", age: 48}
+];
+
+// A simple function to get just the name and
+// surname in one string.
+var fullName = function(x){
+  return x.name + " " + x.surname;
+}
+
+var fn = myFriends.map(fullName);
+console.log(fn)
+// Should output
+// ["John Smith", "Sarah Smith", "Michael Jones", "Garry Thomas"]
+
 
 
 ///filter
@@ -163,6 +182,24 @@ function reject(array, iteratorFunction) {
 }
 var c = reject(numbersB, 15);
 console.log(c);
+
+
+// An array of people.
+var myFriends = [
+  { name: "John", gender: "male" },
+  { name: "Kate", gender: "female" },
+  { name: "Mike", gender: "male" },
+  { name: "Sophie", gender: "female" },
+  { name: "Richard", gender: "male" },
+  { name: "Keith", gender: "male" }
+];
+
+// A simple filter based on gender.
+var isMale = function(x){
+  return x.gender == "male";
+}
+
+myFriends.filter(isMale); // John, Mike, Richard, Keith
 
 console.log("------------------------------------find-------------------------------------");
 var user = users.find(function(user) {
@@ -391,9 +428,168 @@ ret.sort(function(a, b) {
 console.log(ret);
 
 
+// Arrays of expenses.
+var oldExpenses = [
+  { company: "BigCompany Co.", value: 1200.10},
+  { company: "Pineapple Inc.", value: 3107.02},
+  { company: "Office Supplies Inc.", value: 266.97}
+];
+var newExpenses = [
+  { company: "Office Supplies Inc.", value: 108.11},
+  { company: "Megasoft Co.", value: 1208.99}
+];
+
+// Simple summation function
+var sumValues = function(sum, x){
+  return sum + x.value;
+}
+
+// Reducing the first array to a sum of values.
+var oldExpensesSum = oldExpenses.reduce(sumValues, 0.0);
+// Reducing the second array to a sum of values.
+console.log(newExpenses.reduce(sumValues, oldExpensesSum)); // 5891.19
 
 
 
+
+// An array of articles with their tags.
+var articles = [
+  {title: "Introduction to Javascript Scope", tags: [ "Javascript", "Variables", "Scope"]},
+  {title: "Javascript Closures", tags: [ "Javascript", "Variables", "Closures"]},
+  {title: "A Guide to PWAs", tags: [ "Javascript", "PWA"]},
+  {title: "Javascript Functional Programming Examples", tags: [ "Javascript", "Functional", "Function"]},
+  {title: "Why Javascript Closures are Important", tags: [ "Javascript", "Variables", "Closures"]},
+];
+
+// A function that reduces the above array to an
+// array based on tags.
+var tagView = function(accumulator, x){
+  // For every tag in the article's tag array
+  x.tags.forEach(function(currentTag){
+    // Create a function to check if it matches
+    var findCurrentTag = function(y) { return y.tag == currentTag; };
+    // Check if it's already in the accumulator array
+    if (accumulator.some(findCurrentTag)){
+      // Find it and get its index
+      var existingTag = accumulator.find(findCurrentTag);
+      var existingTagIndex = accumulator.findIndex(findCurrentTag);
+      // Update the number and array of articles
+      accumulator[existingTagIndex].count += 1;
+      accumulator[existingTagIndex].articles.push(x.title);
+    }
+    // Otherwise add the tag to the accumulator array
+    else {
+      accumulator.push({tag: currentTag, count: 1, articles: [x.title]});
+    }
+  });
+  // Return the accumulator array
+  return accumulator;
+}
+
+// Transform the original array
+articles.reduce(tagView,[]);
+// Output:
+/*
+[
+ {tag: "Javascript", count: 5, articles: [
+    "Introduction to Javascript Scope", 
+    "Javascript Closures",
+    "A Guide to PWAs", 
+    "Javascript Functional Programming Examples",
+    "Why Javascript Closures are Important"
+ ]},
+ {tag: "Variables", count: 3, articles: [
+    "Introduction to Javascript Scope", 
+    "Javascript Closures",
+    "Why Javascript Closures are Important"
+ ]},
+ {tag: "Scope", count: 1, articles: [ 
+    "Introduction to Javascript Scope" 
+ ]},
+ {tag: "Closures", count: 2, articles: [
+    "Javascript Closures",
+    "Why Javascript Closures are Important"
+ ]},
+ {tag: "PWA", count: 1, articles: [
+    "A Guide to PWAs"
+ ]},
+ {tag: "Functional", count: 1, articles: [
+    "Javascript Functional Programming Examples"
+ ]},
+ {tag: "Function", count: 1, articles: [
+    "Javascript Functional Programming Examples"
+ ]}
+]
+*/
+
+
+console.log("---------------------------sort------------------------")
+// Definition of our comparison function.
+var sortByWeight = function(x,y){
+  var xW = x.measurement == "kg" ? x.weight : x.weight * 0.453592;
+  var yW = y.measurement == "kg" ? y.weight : y.weight * 0.453592;
+  return xW > yW ? 1 : -1;
+}
+
+// Just two slightly different lists of data,
+// that need to be sorted based on weight.
+var firstList = [
+  { name: "John", weight: 220, measurement: "lbs" },
+  { name: "Kate", weight: 58, measurement: "kg" },
+  { name: "Mike", weight: 137, measurement: "lbs" },
+  { name: "Sophie", weight: 66, measurement: "kg" },
+];
+var secondList = [
+  { name: "Margaret", weight: 161, measurement: "lbs", age: 51 },
+  { name: "Bill", weight: 76, measurement: "kg", age: 62 },
+  { name: "Jonathan", weight: 72, measurement: "kg", age: 43 },
+  { name: "Richard", weight: 74, measurement: "kg", age: 29 },
+];
+
+// Using the sorting function we defined to
+// sort both lists.
+firstList.sort(sortByWeight); // Kate, Mike, Sophie, John 
+secondList.sort(sortByWeight); // Jonathan, Margaret, Richard, Bill
+
+
+console.log("---------------------------sort------------------------")
+
+
+var highScores = [
+  {score: 237, name: "Jim"},
+  {score: 108, name: "Kit"},
+  {score: 91, name: "Rob"},
+  {score: 0},
+  {score: 0}
+];
+
+// Simple reusable functions that check if
+// an item has a name or not and if an item
+// has a score larger than zero.
+var hasName = function(x){
+  return typeof x['name'] !== 'undefined';
+}
+var hasNotName = function(x){
+  return !hasName(x);
+}
+var nonZeroHighScore = function(x){
+  return x.score != 0;
+}
+
+// Fill in the blank names until none exist.
+while (!highScores.every(hasName)){
+  var highScore = highScores.find(hasNotName);
+  highScore.name = "---";
+  var highScoreIndex = highScores.findIndex(hasNotName);
+  highScores[highScoreIndex] = highScore;
+}
+
+// Check if non-zero scores exist and print
+// them out.
+if (highScores.some(nonZeroHighScore))
+  console.log(highScores.filter(nonZeroHighScore));
+else 
+  console.log("No non-zero high scores!");
 
 
 

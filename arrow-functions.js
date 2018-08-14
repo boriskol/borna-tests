@@ -16,6 +16,7 @@ materials.map(({ length }) => length); // [8, 6, 7, 9]
 
 
 console.log("------- arrow functions ---------");
+
 var a = [1,2,3,4,5]
 a = a.map( v => v * 2)
 console.log(a)

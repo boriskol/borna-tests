@@ -124,7 +124,7 @@ console.log(oCat.breathing); // 'yes'
 
 
 function VehicleA(){
-	this.engines: 1
+	this.engines = 1;
 }
 VehicleA.prototype.ignition = function() {
 	console.log("turning engine")
