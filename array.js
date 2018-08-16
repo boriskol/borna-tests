@@ -213,6 +213,367 @@ const everyNth = function(arr, nth){
 }
 everyNth([1, 2, 3, 4, 5, 6], 2); // [ 2, 4, 6 ]
 
+//Filters out the non-unique values in an array.
+const filterNonUnique = arr => arr.filter(i => arr.indexOf(i) === arr.lastIndexOf(i));
+const filterNonUnique = function(arr){
+  return arr.filter(function(i){
+    return arr.indexOf(i) === arr.lastIndexOf(i);
+  })
+}
+filterNonUnique([1, 2, 2, 3, 4, 4, 5]); // [1,3,5]
+
+//Filters out the non-unique values in an array, based on a provided comparator function.
+const filterNonUniqueBy = (arr, fn) => arr.filter((v, i) => arr.every((x, j) => (i === j) === fn(v, x, i, j)));
+const filterNonUniqueBy = function(arr, fn){
+  return arr.filter(function(v, i){
+    return arr.every(function(x, j){
+      return (i === j) === fn(v, x, i, j)
+    })
+  });
+}
+filterNonUniqueBy(
+  [
+    { id: 0, value: 'a' },
+    { id: 1, value: 'b' },
+    { id: 2, value: 'c' },
+    { id: 1, value: 'd' },
+    { id: 0, value: 'e' }
+  ],
+  (a, b) => a.id == b.id
+); // [ { id: 2, value: 'c' } ]
+
+//Returns the last element for which the provided function returns a truthy value.
+//The pop() method removes the last element from an array and returns that element. 
+function compare(n){
+  return n % 2 === 1
+}
+//const findLast = (arr, fn) => arr.filter(fn).pop();
+const findLast = function(arr, fn){
+  return arr.filter(fn).pop()
+}
+//findLast([1, 2, 3, 4], n => n % 2 === 1); // 3
+//findLast([1, 2, 3, 4], function(n){return n % 2 === 1} ); // 3
+findLast([1, 2, 3, 4], compare );
+
+
+const findLastIndex = (arr, fn) => 
+  arr.map((val, i) => [i, val]).filter(([i, val]) => fn(val, i, arr)).pop()[0];
+findLastIndex([1, 2, 3, 4], n => n % 2 === 1); // 2 (index of the value 3)
+
+//Flattens an array up to the specified depth.
+const flatten = (arr, depth = 1) =>
+  arr.reduce((a, v) => a.concat(depth > 1 && Array.isArray(v) ? flatten(v, depth - 1) : v), []);
+const flatten = function(arr, depth = 1){
+  return arr.reduce(function(a, v) {
+    return a.concat(depth > 1 && Array.isArray(v) ? flatten(v, depth - 1) : v);
+  }, [])
+}
+flatten([1, [2], 3, 4]); // [1, 2, 3, 4]
+flatten([1, [2, [3, [4, 5], 6], 7], 8], 2); // [1, 2, 3, [4, 5], 6, 7, 8]
+
+//Executes a provided function once for each array element, starting from the array's last element.
+const forEachRight = (arr, callback) =>
+  arr.slice(0)
+    .reverse()
+    .forEach(callback);
+forEachRight([1, 2, 3, 4], val => console.log(val)); // '4', '3', '2', '1'
+
+//Groups the elements of an array based on the given function.
+const groupBy = (arr, fn) =>
+  arr.map(typeof fn === 'function' ? fn : val => val[fn]).reduce((acc, val, i) => {
+    acc[val] = (acc[val] || []).concat(arr[i]);
+    return acc;
+  }, {});
+/*const groupBy = function(arr, fn){
+  return arr.map(typeof fn === 'function' ? fn : function(val){ 
+    return val[fn].reduce(function(acc, val, i){
+      acc[val] = (acc[val] || []).concat(arr[i]);
+      return acc;
+    }, [])
+  }, [])
+}*/
+groupBy([6.1, 4.2, 6.3], Math.floor); // {4: [4.2], 6: [6.1, 6.3]}
+groupBy(['one', 'two', 'three'], 'length'); // {3: ['one', 'two'], 5: ['three']}
+
+
+//Returns the head of a list.
+const head = arr => arr[0];
+const head = function(arr){
+  return arr[0]
+}
+head([1, 2, 3]); // 1
+
+//Returns all indices of val in an array. If val never occurs, returns [].
+const indexOfAll = (arr, val) => arr.reduce((acc, el, i) => (el === val ? [...acc, i] : acc), []);
+const indexOfAll = function(arr, val){
+  return arr.reduce(function(acc, el, i){
+    return (el === val ? [...acc, i] : acc)
+  }, []);
+}
+indexOfAll([1, 2, 3, 1, 2, 3], 1); // [0,3]
+indexOfAll([1, 2, 3], 4); // []
+
+//Returns all the elements of an array except the last one.
+const initial = arr => arr.slice(0, -1);
+const initial = function(arr){
+  return arr.slice(0, -1);
+} 
+initial([1, 2, 3]); // [1,2]
+
+
+//Initializes an array containing the numbers in the specified 
+//range where start and end are inclusive with their common difference step.
+const initializeArrayWithRange = (end, start = 0, step = 1) =>
+  Array.from({ length: Math.ceil((end - start + 1) / step) }, (v, i) => i * step + start);
+const initializeArrayWithRange = function(end, start = 0, step = 1){
+  return Array.from({ length: Math.ceil((end - start + 1) / step) }, function(v, i){
+    return i * step + start
+  });
+}
+initializeArrayWithRange(5); // [0,1,2,3,4,5]
+initializeArrayWithRange(7, 3); // [3,4,5,6,7]
+initializeArrayWithRange(9, 0, 2); // [0,2,4,6,8]
+//Initializes an array containing the numbers in the specified range (in reverse) 
+//where start and end are inclusive with their common difference step.
+const initializeArrayWithRangeRight = (end, start = 0, step = 1) =>
+  Array.from({ length: Math.ceil((end + 1 - start) / step) }).map(
+    (v, i, arr) => (arr.length - i - 1) * step + start
+  );
+const initializeArrayWithRangeRight = function(end, start = 0, step = 1){
+  return Array.from({ length: Math.ceil((end + 1 - start) / step) }).map(function(v, i, arr) { 
+    return (arr.length - i - 1) * step + start
+  });
+} 
+initializeArrayWithRangeRight(5); // [5,4,3,2,1,0]
+initializeArrayWithRangeRight(7, 3); // [7,6,5,4,3]
+initializeArrayWithRangeRight(9, 0, 2); // [8,6,4,2,0]
+
+//Initializes and fills an array with the specified values.
+const initializeArrayWithValues = (n, val = 0) => Array(n).fill(val);
+const initializeArrayWithValues = function(n, val = 0){
+  return Array(n).fill(val);
+}
+initializeArrayWithValues(5, 2); // [2,2,2,2,2]
+
+//Create a n-dimensional array with given value.
+const initializeNDArray = (val, ...args) =>
+  args.length === 0
+    ? val
+    : Array.from({ length: args[0] }).map(() => initializeNDArray(val, ...args.slice(1)));
+
+initializeNDArray(1, 3); // [1,1,1]
+initializeNDArray(5, 2, 2, 2); // [[[5,5],[5,5]],[[5,5],[5,5]]]
+
+//Returns a list of elements that exist in both arrays.
+const intersection = (a, b) => {
+  const s = new Set(b);
+  return a.filter(x => s.has(x));
+};
+const intersection = function(a, b){
+  const s = new Set(b);
+  return a.filter(function(x){
+    return s.has(x)
+  });
+}
+intersection([1, 2, 3], [4, 3, 2]); // [2,3]
+
+//Returns a list of elements that exist in both arrays, 
+//after applying the provided function to each array element of both.
+const intersectionBy = (a, b, fn) => {
+  const s = new Set(b.map(x => fn(x)));
+  return a.filter(x => s.has(fn(x)));
+};
+intersectionBy([2.1, 1.2], [2.3, 3.4], Math.floor); // [2.1]
+
+//Returns a list of elements that exist in both arrays, using a provided comparator function.
+const intersectionWith = (a, b, comp) => a.filter(x => b.findIndex(y => comp(x, y)) !== -1);
+const intersectionWith = function(a, b, comp){
+  return a.filter(function(x){
+    return b.findIndex(function(y){
+      return comp(x, y)
+    }) !== -1;
+  })
+}
+intersectionWith([1, 1.2, 1.5, 3, 0], [1.9, 3, 0, 3.9], (a, b) => Math.round(a) === Math.round(b)); // [1.5, 3, 0]
+
+//Returns 1 if the array is sorted in ascending order, 
+//-1 if it is sorted in descending order or 0 if it is not sorted.
+const isSorted = arr => {
+  let direction = -(arr[0] - arr[1]);
+  console.log(direction)
+  for (let [i, val] of arr.entries()) {
+
+    direction = !direction ? -(arr[i - 1] - arr[i]) : direction;
+    console.log(direction)
+
+    if (i === arr.length - 1) return !direction ? 0 : direction;
+    else if ((val - arr[i + 1]) * direction > 0) return 0;
+
+  }
+};
+
+isSorted([0, 1, 2, 2]); // 1
+isSorted([4, 3, 2]); // -1
+isSorted([4, 3, 5]); // 0
+
+//Joins all elements of an array into a string 
+//and returns this string. Uses a separator and an end separator.
+const join = (arr, separator = ',', end = separator) =>
+  arr.reduce(
+    (acc, val, i) =>
+      i === arr.length - 2
+        ? acc + val + end
+        : i === arr.length - 1
+          ? acc + val
+          : acc + val + separator,
+    ''
+  );
+join(['pen', 'pineapple', 'apple', 'pen'], ',', '&'); // "pen,pineapple,apple&pen"
+join(['pen', 'pineapple', 'apple', 'pen'], ','); // "pen,pineapple,apple,pen"
+join(['pen', 'pineapple', 'apple', 'pen']); // "pen,pineapple,apple,pen"
+
+//Converts an array of objects to a 
+//comma-separated values (CSV) string that contains only the columns specified.
+const JSONtoCSV = (arr, columns, delimiter = ',') =>
+  [
+    columns.join(delimiter),
+    ...arr.map(obj =>
+      columns.reduce(
+        (acc, key) => `${acc}${!acc.length ? '' : delimiter}"${!obj[key] ? '' : obj[key]}"`,
+        ''
+      )
+    )
+  ].join('\n');
+
+JSONtoCSV([{ a: 1, b: 2 }, { a: 3, b: 4, c: 5 }, { a: 6 }, { b: 7 }], ['a', 'b']); // 'a,b\n"1","2"\n"3","4"\n"6",""\n"","7"'
+JSONtoCSV([{ a: 1, b: 2 }, { a: 3, b: 4, c: 5 }, { a: 6 }, { b: 7 }], ['a', 'b'], ';'); // 'a;b\n"1";"2"\n"3";"4"\n"6";""\n"";"7"'
+
+
+//last
+const last = arr => arr[arr.length - 1];
+last([1, 2, 3]); // 3
+
+//Takes any number of iterable objects or objects with a length property and returns the longest one.
+const longestItem = (...vals) => [...vals].reduce((a, x) => (a.length > x.length ? a : x), []);
+const longestItem = function(...vals){
+  return [...vals].reduce(function(a, x){
+    return a.length > x.length ? a : x
+  }, []);
+}
+longestItem('this', 'is', 'a', 'testcase'); // 'testcase'
+longestItem(...['a', 'ab', 'abc']); // 'abc'
+longestItem(...['a', 'ab', 'abc'], 'abcd'); // 'abcd'
+longestItem([1, 2, 3], [1, 2], [1, 2, 3, 4, 5]); // [1, 2, 3, 4, 5]
+longestItem([1, 2, 3], 'foobar'); // 'foobar'
+
+
+//Maps the values of an array to an object using a 
+//function, where the key-value pairs consist of the original value as the key and the mapped value.
+const mapObject = (arr, fn) =>
+  (a => (
+    (a = [arr, arr.map(fn)]), a[0].reduce((acc, val, ind) => ((acc[val] = a[1][ind]), acc), {})
+  ))();
+const mapObject = function(arr, fn) {
+  return (function(a) {
+    return (a = [arr, arr.map(fn)]), a[0].reduce(function(acc, val, ind){
+      return ((acc[val] = a[1][ind]), acc)
+    }, {})
+  })();
+}
+const squareIt = arr => mapObject(arr, a => a * a);
+squareIt([1, 2, 3]); // { 1: 1, 2: 4, 3: 9 }
+
+
+//Returns the n maximum elements from the provided array. If n is greater 
+//than or equal to the provided array's length, 
+//then return the original array(sorted in descending order).
+const maxN = (arr, n = 1) => [...arr].sort((a, b) => b - a).slice(0, n);
+// sort ascd //const maxN = (arr, n = 1) => [...arr].sort((a, b) => a - b).slice(0, n);
+maxN([1, 2, 3]); // [3]
+maxN([1, 2, 3], 2); // [3,2]
+
+
+//Returns true if the provided predicate function 
+//returns false for all elements in a collection, false otherwise.
+const none = (arr, fn = Boolean) => !arr.some(fn);
+none([0, 1, 3, 0], x => x == 2); // true
+none([0, 0, 0]); // true
+
+//Returns the nth element of an array.
+const nthElement = (arr, n = 0) => (n > 0 ? arr.slice(n, n + 1) : arr.slice(n))[0];
+const nthElement = function(arr, n = 0){
+  return ( n > 0 ? arr.slice(n, n + 1) : arr.slice(n) )[0];
+}
+nthElement(['a', 'b', 'c'], 1); // 'b'
+nthElement(['a', 'b', 'b'], -3); // 'a'
+
+//Groups the elements into two arrays, depending on the provided function's truthiness for each element.
+const partition = (arr, fn) =>
+  arr.reduce(
+    (acc, val, i, arr) => {
+      acc[fn(val, i, arr) ? 0 : 1].push(val);
+      return acc;
+    },
+    [[], []]
+  );
+const users = [{ user: 'barney', age: 36, active: false }, { user: 'fred', age: 40, active: true }];
+partition(users, o => o.active); // [[{ 'user': 'fred', 'age': 40, 'active': true }],[{ 'user': 'barney',  'age': 36, 'active': false }]]
+
+//Mutates the original array to filter out the values specified.
+const pull = (arr, ...args) => {
+  let argState = Array.isArray(args[0]) ? args[0] : args;
+  let pulled = arr.filter((v, i) => !argState.includes(v));
+  arr.length = 0;
+  pulled.forEach(v => arr.push(v));
+};
+const pull = (arr, ...args) => {
+  let argState = Array.isArray(args[0]) ? args[0] : args;
+  let pulled = arr.filter(function(v, i){
+    return !argState.includes(v)
+  });
+  arr.length = 0;
+  pulled.forEach(function(v){
+    return arr.push(v)
+  });
+  return arr
+};
+
+let myArray = ['a', 'b', 'c', 'a', 'b', 'c'];
+pull(myArray, 'a', 'c'); // myArray = [ 'b', 'b' ]
+
+//Mutates the original array to filter out the values at the specified indexes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -223,14 +584,6 @@ everyNth([1, 2, 3, 4, 5, 6], 2); // [ 2, 4, 6 ]
 
 
 const over = (...fns) => (...args) => fns.map(fn => fn.apply(null, args));
-/*const over = function(...fns){
-  return function(...args){
-    return fns.map(function(fn){
-      return fn.apply(null, args)
-    }) 
-  }
-}*/
-//const minMax = over(Math.min, Math.max);
 var minMax = over(1, 2, 3, 4, 5); // [1,5]
 
 
