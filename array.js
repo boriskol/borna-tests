@@ -526,7 +526,7 @@ const pull = (arr, ...args) => {
   arr.length = 0;
   pulled.forEach(v => arr.push(v));
 };
-const pull = (arr, ...args) => {
+const pull = function(arr, ...args){
   let argState = Array.isArray(args[0]) ? args[0] : args;
   let pulled = arr.filter(function(v, i){
     return !argState.includes(v)
@@ -537,22 +537,91 @@ const pull = (arr, ...args) => {
   });
   return arr
 };
-
 let myArray = ['a', 'b', 'c', 'a', 'b', 'c'];
 pull(myArray, 'a', 'c'); // myArray = [ 'b', 'b' ]
 
 //Mutates the original array to filter out the values at the specified indexes.
+const pullAtIndex = (arr, pullArr) => {
+  let removed = [];
 
+  let pulled = arr.map((v, i) => (pullArr.includes(i) ? removed.push(v) : v)).filter((v, i) => !pullArr.includes(i));
+  arr.length = 0;
+  pulled.forEach(v => arr.push(v));
+  //console.log(removed)
+  return removed;
+};
+/*const pullAtIndex = (arr, pullArr) => {
+  let removed = [];
+  let pulled = arr.map(function(v, i){
+    return (pullArr.includes(i) ? removed.push(v) : v)
+  }).filter(function(v, i){
+    return !pullArr.includes(i)
+  });
+  arr.length = 0;
+  pulled.forEach(function(v){
+    arr.push(v)
+  });
+  return removed;
+};*/
+let myArray = ['a', 'b', 'c', 'd'];
+let pulled = pullAtIndex(myArray, [1, 3]); // myArray = [ 'a', 'c' ] , pulled = [ 'b', 'd' ]
 
+//Mutates the original array to filter out the values specified. Returns the removed elements.
+const pullAtValue = (arr, pullArr) => {
+  let removed = [],
+    pushToRemove = arr.forEach((v, i) => (pullArr.includes(v) ? removed.push(v) : v)),
+    mutateTo = arr.filter((v, i) => !pullArr.includes(v));
+  arr.length = 0;
+  mutateTo.forEach(v => arr.push(v));
+  return removed;
+};
+const pullAtValue = function(arr, pullArr){
+  let removed = [],
+  pushToRemove = arr.forEach(function(v, i) {
+    //console.log(v)
+    return (pullArr.includes(v) ? removed.push(v) : v)
+  }),
+  mutateTo = arr.filter(function(v, i) { 
+    //console.log(v)
+    return !pullArr.includes(v)
+  });
+  arr.length = 0;
+  mutateTo.forEach(function(v){
+    //console.log(`mutateTo ${v}`)
+    return arr.push(v)
+  });
+  //console.log(removed)
+  //console.log(mutateTo)
+  //console.log(arr)
+  return arr//removed;
+};
+let myArray = ['a', 'b', 'c', 'd'];
+let pulled = pullAtValue(myArray, ['b', 'd']); // myArray = [ 'a', 'c' ] , pulled = [ 'b', 'd' ]
+console.log(arr)
 
+//Mutates the original array to filter out the values specified, based on a given iterator function.
+const pullBy = (arr, ...args) => {
+  const length = args.length;
+  let fn = length > 1 ? args[length - 1] : undefined;
+  fn = typeof fn == 'function' ? (args.pop(), fn) : undefined;
+  let argState = (Array.isArray(args[0]) ? args[0] : args).map(val => fn(val));
+  let pulled = arr.filter((v, i) => !argState.includes(fn(v)));
+  arr.length = 0;
+  pulled.forEach(v => arr.push(v));
+};
+var myArray = [{ x: 1 }, { x: 2 }, { x: 3 }, { x: 1 }];
+pullBy(myArray, [{ x: 1 }, { x: 3 }], o => o.x); // myArray = [{ x: 2 }]
 
-
-
-
-
-
-
-
+//Filter an array of objects based on a condition while also filtering out unspecified keys.
+const reducedFilter = (data, keys, fn) =>
+  data.filter(fn).map(el =>
+    keys.reduce((acc, key) => {
+      acc[key] = el[key];
+      return acc;
+    }, {})
+  );
+const data = [{id: 1,name: 'john',age: 24},{id: 2,name: 'mike',age: 50}];
+reducedFilter(data, ['id', 'name'], item => item.age > 24); // [{ id: 2, name: 'mike'}]
 
 
 

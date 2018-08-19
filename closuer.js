@@ -231,5 +231,19 @@ h(5); // 25
 
 
 
+function  outher(){
+  let count = 0;
+  function increment(){
+    count++;
+    return count;
+  }
+  return increment;
+}
+let myf = outher()
+myf()
+myf()
+
+
+
 
 
