@@ -312,7 +312,7 @@ function buildAlert(msg) {
                     ,UserId:"LO5758a0bc01449c0001ac1f18a31c21"
                     ,UserImage:"img/prst.png"
                     ,UserAction: "Home"
-                    },{
+            },{
                     ChatId:"535c54248542c31ce534af210036ef09"
                     ,Message:"whts up"
                     ,Online:false
@@ -323,6 +323,17 @@ function buildAlert(msg) {
                     ,UserId:"LO5758a0bc01449c0001ac1f18a31c21"
                     ,UserImage:"img/rog.jpg"
                     ,UserAction: "About"
+            },{
+                    ChatId:"535c54248542c31ce534af210036ef10"
+                    ,Message:"alo"
+                    ,Online:false
+                    ,OtherUserId:"fmOBp7taxcrxx67"
+                    ,OtherUsername:"kolaric"
+                    ,TimeStamp:1532352220.698931
+                    ,Unread:[]
+                    ,UserId:"LO5758a0bc01449c0001ac1f18a31c21"
+                    ,UserImage:"img/rog.jpg"
+                    ,UserAction: "Contacts"
             }]
 
       // { ChatId, Message, OtherUserId, OtherUsername, TimeStamp, UserId }
@@ -342,4 +353,35 @@ function buildAlert(msg) {
   })();
 
    //getMessages(function( ) { });
+
+
+/*
+
+
+
+
+*/
+var el = document.querySelector('.el')
+var height = el.scrollHeight
+el.style.setProperty('--max-height', height + 'px')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
 
