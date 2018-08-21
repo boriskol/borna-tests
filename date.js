@@ -52,7 +52,7 @@ const tomorrow = (long = false) => {
   ).padStart(2, '0')}`;
   return !long ? ret : `${ret}T00:00:00`;
 };
-Show examples
+
 tomorrow(); // 2017-12-27 (if current date is 2017-12-26)
 tomorrow(true); // 2017-12-27T00:00:00 (if current date is 2017-12-26)
 
