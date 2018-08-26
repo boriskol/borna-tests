@@ -516,6 +516,12 @@ const partition = (arr, fn) =>
     },
     [[], []]
   );
+const partition = function(arr, fn) {
+  return arr.reduce(function(acc, val, i, arr) {
+    return acc[fn(val, i, arr) ? 0 : 1].push(val);
+      return acc;
+  },[[], []]);
+}
 const users = [{ user: 'barney', age: 36, active: false }, { user: 'fred', age: 40, active: true }];
 partition(users, o => o.active); // [[{ 'user': 'fred', 'age': 40, 'active': true }],[{ 'user': 'barney',  'age': 36, 'active': false }]]
 
@@ -612,6 +618,11 @@ const pullBy = (arr, ...args) => {
 var myArray = [{ x: 1 }, { x: 2 }, { x: 3 }, { x: 1 }];
 pullBy(myArray, [{ x: 1 }, { x: 3 }], o => o.x); // myArray = [{ x: 2 }]
 
+
+
+
+
+//
 //Filter an array of objects based on a condition while also filtering out unspecified keys.
 const reducedFilter = (data, keys, fn) =>
   data.filter(fn).map(el =>
@@ -620,14 +631,24 @@ const reducedFilter = (data, keys, fn) =>
       return acc;
     }, {})
   );
-const data = [{id: 1,name: 'john',age: 24},{id: 2,name: 'mike',age: 50}];
-reducedFilter(data, ['id', 'name'], item => item.age > 24); // [{ id: 2, name: 'mike'}]
-
-
-
-
-
-
+const reducedFilter = function(data, keys, fn){
+  return data.filter(fn)
+    .map(function(el){
+          return keys.reduce(function(acc, key){
+            //return acc[key] = el[key];
+            if(acc[key] = el[key]){
+              //if i return el return entire el object
+              return acc;
+            }
+          }, {})
+    });
+}
+function between(item){
+  return item.age >= 33 && item.age <= 48
+}
+const data = [{id: 1,name: 'john',age: 24},{id: 2,name: 'mike',age: 50},{id: 3,name: 'borna',age: 48},{id: 4,name: 'leanne',age: 33}];
+//reducedFilter(data, ['id', 'name'], item => item.age > 24); // [{ id: 2, name: 'mike'}]
+reducedFilter(data, ['id', 'name'], between); // [{ id: 2, name: 'mike'}]
 
 
 

@@ -74,6 +74,224 @@ function CNContactStore ( ) {
            
 //window.CNContactStore = new CNContactStore ( )
 
+//Create a function that takes an integer as an argument and returns "Even" for even numbers or "Odd" for odd numbers.
+function even_or_odd(number) {
+  var x = number % 2;
+  if (x === 0) {
+    return "Even";
+  } else {
+    return "Odd";
+  };
+}
+even_or_odd(2)
+even_or_odd(0)
+even_or_odd(7)
+even_or_odd(1)
+
+function repeatStr (n, s) {
+    var accumulatedStr = "";
+    while (n > 0) {
+        accumulatedStr += s
+        n--;
+    }
+    return accumulatedStr;
+}
+function repeatStr (n, s) {
+  return s.repeat(n);
+}
+repeatStr = (n, s) => s.repeat(n)
+repeatStr(3, "*")
+repeatStr(5, "#")
+repeatStr(2, "ha ")
+
+
+function makeNegative(num) {
+  return -Math.abs(num);
+}
+
+function copyarrayandmultiplyby2(array){
+  const output = [];
+  for(let i=0; i<array.length; i++){
+    output.push(array[i]*2);
+  }
+  return output;
+}
+const myArray = [1,2,3];
+const res = copyarrayandmultiplyby2(myArray)
+
+
+function copyArrayAndMultiplate(array, instruction){
+  const output = [];
+  for (let i = 0; i<array.length; i++){
+    output.push(instruction(array[i]));
+  }
+  return output;
+}
+function multiplyBy2(input){
+  return input * 2;
+}
+const result = copyArrayAndMultiplate([1,2,3,4], multiplyBy2)
+
+
+
+///
+const str = 'this is foo bar';
+const count = [...str].filter(l => l === 'o').length;
+console.log(count);
+
+//////
+/////
+function duplicateCount(text){
+  var arr = text.toLowerCase().split(''); 
+  var newArr = arr.filter(function(a, b) {
+    return arr.indexOf(a) !== b;
+  });
+  return newArr.filter(function(item, pos) {
+    return newArr.indexOf(item) == pos;
+  }).length;
+}
+// Other Solutions
+function duplicateCount(text){
+  return text.toLowerCase().split('').filter(function(val, i, arr){
+    return arr.indexOf(val) !== i && arr.lastIndexOf(val) === i;
+  }).length;
+}
+function duplicateCount(text) {
+  var dup = [];
+  text.toLowerCase().split('').forEach(function(v, i, arr) {
+    if(i != arr.lastIndexOf(v) && dup.indexOf(v) == -1) dup.push(v);
+  });
+  return dup.length;
+}
+function duplicateCount(text){
+  return (text.toLowerCase().split('').sort().join('').match(/([^])\1+/g) || []).length;
+}
+function duplicateCount(text){
+  return text
+      .toLowerCase()
+      .split('')
+      .reduce(function(a, l) {
+        a[l] = a[l] ? a[l]+1 : 1;
+        if(a[l] === 2) a.count++;
+        return a;
+      }, {count:0}).count;
+}
+  
+//duplicateCount("");
+//duplicateCount("abadcde");
+//duplicateCount("aabbcde");
+//duplicateCount("aabBcde");
+//duplicateCount("Indivisibility");
+duplicateCount("Indivisibaailities");
+
+
+////
+var array1 = [true,  true,  true,  false,
+              true,  true,  true,  true ,
+              true,  false, true,  false,
+              true,  false, false, true ,
+              true,  true,  true,  true ,
+              false, false, true,  true ];
+
+function countSheeps(arrayOfSheep) {
+  var searchSheep = true;
+  var count = arrayOfSheep.reduce(function(n, val) {
+    return n + (val === searchSheep);
+  }, 0);
+  return count
+}
+//filter
+function countSheeps(arrayOfSheeps) {
+  return arrayOfSheeps.filter(Boolean).length;
+}
+//map
+function countSheeps(arrayOfSheep) {
+  var count = 0;
+  arrayOfSheep.map(function(current){
+  if(current){
+    count += 1;
+  }
+  });
+  return count;
+}
+//reduce
+function countSheeps(arrayOfSheeps) {
+  return arrayOfSheeps.reduce(function(x,y){
+    return x + (y || false);
+  });
+}
+countSheeps(array1)
+
+
+////Your task is to make a function that can take any non-negative integer as a argument 
+//and return it with its digits in descending order. Essentially, 
+//rearrange the digits to create the highest possible number.
+let example = 21446;
+function descendingOrder(n){
+  var newArr = [],
+      newString = n.toString();
+  for(var i=0; i < newString.length; i++) {
+    newArr[i] = newString[i];
+  }
+  return parseInt(newArr.sort().reverse().join(''))
+}
+function descendingOrder(n){
+  var newArr = [], newString = n.toString();
+  for(var i=0; i < newString.length; i++) {
+    newArr[i] = newString[i];
+  }
+  return parseInt(newArr.sort().reverse().join(''))
+}
+function descendingOrder(n){
+  let arr = n.toString().split('');
+  let arrNum = [];
+  console.log(arr);
+  for(var i = 0; i < arr.length; i++){
+    arrNum.push(parseInt(arr[i]));
+    console.log(arrNum)
+  }
+  
+  let sorted = arrNum.sort(function(a, b){return b-a});
+  let sorted2 = sorted.join('');
+  return parseInt(sorted2);
+}
+function descendingOrder(n){
+  return parseInt(n.toString().split('').sort(function(a, b){
+    return b - a;
+  }).join(''));
+}
+function descendingOrder(n){
+  return parseInt(String(n).split('').sort().reverse().join(''))
+}
+function descendingOrder(n) {
+  return +n.toString().split('').sort().reverse().join('');
+}
+function descendingOrder(n) {
+  return n.digits().sort().reverse().undigits();
+}
+Number.prototype.digits = function() {
+  const result = [];
+  let n = this;
+  do {
+    result.unshift(n % 10);
+    n = Math.floor(n / 10);
+  } while(n);
+  return result;
+};
+
+Array.prototype.undigits = function() {
+  return this.reduce((n, d) => n * 10 + d, 0);
+};
+
+descendingOrder(12243456);
+descendingOrder(example);
+
+ 
+
+
+
+
+
 
 
 

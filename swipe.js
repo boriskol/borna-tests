@@ -83,6 +83,7 @@ function buildAlert(msg) {
             function cur( ) {
                 //console.log("cur")
                 var c = block.style.left;
+
                 if(!c) {
                     block.style.left = "0px";
                     return 0;
@@ -102,14 +103,15 @@ function buildAlert(msg) {
                 block.removeEventListener('mouseup', release, false);
 
                 var scroll = cur( );
-                
+               
                 if(scroll == 0){
                     console.log(`Scroll clissck ${scroll}`)
-                    alert("klick")
+                    alert("click")
+
                 }else if(scroll - 10 > -lim){ // didn't fully scroll
                     //$(block).animate({left: 0}, 300);
                     console.log(`scroll - 10 > -lim ${scroll} , ${lim}`);
-                    block.style.left = "0px"
+                    block.style.left = "0px";
                 }else if(scroll <= -lim + 10) {
                     console.log(`scroll <= -lim + 10 ${scroll} , ${lim}`)
                     //$(block).animate({left: -lim}, 300);
@@ -160,10 +162,13 @@ function buildAlert(msg) {
                 //event.preventDefault( );
                 //event.stopPropagation( );
                 if(self.deleteState) {
+                    console.log(self.deleteState)
+                     block.style.left = "0px";
+                     self.deleteState.left = "0px";
                     //$(self.deleteState).animate({left: 0}, 300);
                     //var b = `translateX(${-scroll}px)`
-                    /*
-                    self.deleteState.animate([
+                    
+                    /*self.deleteState.animate([
                       // keyframes
                       { transform: 'translateY(-64px)' }, 
                       { transform: 'translateY(0px)' }
@@ -171,8 +176,8 @@ function buildAlert(msg) {
                       // timing options
                       duration: 300
                       //, iterations: Infinity
-                    });
-                    */
+                    });*/
+                    
                     self.deleteState = null;
                     event.preventDefault( );
                     event.stopPropagation( );
