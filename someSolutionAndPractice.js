@@ -287,20 +287,82 @@ descendingOrder(12243456);
 descendingOrder(example);
 
  
+ /* PUSH PAYLOAD
+
+{
+  "aps": {
+    "alert": {
+    "title": "New Posts!",
+    "subtitle": "subtitlr",
+    "body": "body"
+    },
+    "sound": "default",
+    "category": "myCategory",
+    "mutable-content": 1,
+    "link": "https://pitchfork.com/news/katy-perry-denies-dr-luke-raped-her-in-unsealed-lawsuit-deposition",
+    "attachment-url": "https://media.pitchfork.com/photos/5b21a0ebc87cd85577eaf67d/2:1/w_790/Katy-Perry.jpg"
+  }
+}
+
+ */
+/// o
+
+function userCreator(name, score){
+  const newUser = {}
+  newUser.name  = name;
+  newUser.score = score;
+  newUser.increment = function(){
+    newUser.score++;
+  }
+  return newUser
+}
+const user1 = userCreator("borna",3)
+//const user2 = userCreator("bo",5)
+user1.increment()
+////
+function userCreator(name, score){
+  const newUser = Object.create(functionStore)
+  newUser.name  = name;
+  newUser.score = score;
+  
+  return newUser
+}
+const functionStore = {
+  increment: function(){ this.score++}.
+  login: function(){console.log("you r log in")}
+}
+const use1 = userCreator("borna", 3);
+
+///
+function UserCreator(name, score){
+  this.name  = name;
+  this.score = score;
+}
+UserCreator.prototype.increment = function() {
+  this.score++;
+};
+UserCreator.prototype.login = function() {
+  console.log("you r log in");
+};
+const use1 = new UserCreator("borna", 3);
+use1.increment()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+class UserCreator{
+  constructor(name,score){
+    this.name = name;
+    this.score = score;
+  }
+  increment(){
+    return this.score++;
+  }
+  login(){
+    console.log("you r log in")
+  }
+}
+const use1 = new UserCreator("borna", 3);
+use1.increment()
 
 
 
