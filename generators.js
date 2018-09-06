@@ -294,6 +294,47 @@ const ele1 = retu.next(2);
 
 
 
+function doWhenDataReceived(value){
+    returnNextElement.next(value);
+}
+function *createFlow(){
+    const data yield fetch('https://b-2-studio.com/musicartist/getAllNews.php');
+    console.log(data)
+}
+const rne = createFlow();
+const futureData = rne.next()
+futureData.then(doWhenDataReceived)
+    
+
+
+async createFlow(){
+  console.log("my first");
+  const = data await fetch('https://b-2-studio.com/musicartist/getAllNews.php')
+  console.log(data)
+}
+createFlow()
+console.log("my second");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
