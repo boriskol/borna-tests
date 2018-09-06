@@ -252,6 +252,47 @@ getRandom.next().value;
 
 
 
+function createFlow(array){
+  let i = 0;
+  const inner = { next: 
+    function(){
+      const element = array[i];
+      i++;
+      return element
+    }
+  }
+  return inner;
+}
+const ret = createFlow([4,5,6]);
+const ele = ret.next();
+const ele1 = ret.next()
+console.log(ele)
+console.log(ele1)
+
+
+function *createFlow(){
+  yield 4
+  yield 5
+  yield 6
+}
+
+const retu = createFlow();
+const ele = retu.next()
+const ele1 = retu.next()
+
+function *createFlow(){
+  const num = 10;
+  const newNum = yield num
+  yield 5 + newNum
+  yield 6
+}
+
+const retu = createFlow();
+const ele = retu.next();
+const ele1 = retu.next(2);
+
+
+
 
 
 

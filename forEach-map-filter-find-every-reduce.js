@@ -594,3 +594,40 @@ else
 
 
 
+const myNums = [1,2,3,4,5];
+for(let i = 0; i < myNums.length; i++){
+  const num1 = myNums[i];
+  console.log("num1" + num1)
+  for(let j = i + 1; j < myNums.length; j++){
+    const num2 = myNums[j];
+    console.log("num2" + num2)
+    if(num1 + num2 === 7){
+      console.log('lucky seven')
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
