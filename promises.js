@@ -108,7 +108,7 @@ console.log("-----------promises and fetch----------------");
 
 let urlV = "https://b-2-studio.com/musicartist/getAllNews.php";
 let urlD = "https://b-2-studio.com/PushNotificationiOS/getstorePurches.php";
-function getStudents(){
+function getNews(){
   return fetch(urlV, {
     headers: {
       'Content-Type': 'application/json',
@@ -117,7 +117,7 @@ function getStudents(){
   }).then((response) => response.json())
 };
 
-function getScores(){
+function getPhoness(){
   return fetch(urlD, {
     headers: {
       'Content-Type': 'application/json',
@@ -128,17 +128,56 @@ function getScores(){
 
 // Request both students and scores in parallel and return a Promise for both values.
 // `Promise.all` returns a new Promise that resolves when all of its arguments resolve.
-function getStudentsAndScores(){
-  return Promise.all([getStudents(), getScores()])
+function getNewsandPhones(){
+  return Promise.all([getNews(), getPhoness()])
 }
 
 // When this Promise resolves, both values will be available.
-getStudentsAndScores()
+getNewsandPhones()
   .then(([students, scores]) => {
     // both have loaded!
     console.log(students, scores);
   })
 
+
+
+
+
+
+  
+
 /*
 
 */
+function printHello(){
+    console.log("Hello");
+}
+setTimeout(printHello,1000);
+console.log("Me first!");
+
+
+
+function printHello(){
+    console.log("“Hello”");
+}
+function blockFor1Sec(){
+    //blocks in the JavaScript thread for 1 second
+}
+setTimeout(printHello,0);
+blockFor1Sec()
+console.log("“Me first!”");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

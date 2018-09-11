@@ -11,7 +11,7 @@
     "category": "myCategory",
     "mutable-content": 1,
     "link": "https://www.nme.com/news/music/this-is-not-a-political-statement-lana-del-rey-defends-decision-to-play-israel-show-2368725",
-    "attachment-url": "https://ksassets.timeincuk.net/wp/uploads/sites/55/2018/08/2018_lanadelrey_getty_2000x1270-1.jpg"
+    "attachment": "https://ksassets.timeincuk.net/wp/uploads/sites/55/2018/08/2018_lanadelrey_getty_2000x1270-1.jpg"
   }
 }
 
@@ -25,7 +25,7 @@
     "category": "myCategory",
     "mutable-content": 1,
     "link": "https://www.rollingstone.com/music/music-news/the-grateful-deads-martin-scorsese-produced-doc-long-strange-trip-headed-to-dvd-717228/",
-    "attachment-url": "https://www.rollingstone.com/wp-content/uploads/2018/08/grateful-dead-long-strange-trip-dvd.jpg"
+    "attachment": "https://www.rollingstone.com/wp-content/uploads/2018/08/grateful-dead-long-strange-trip-dvd.jpg"
   }
 }
 
