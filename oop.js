@@ -89,6 +89,20 @@ user1.increment();
 
 
 
+const person = {
+	name: "will",
+	comapny: "Codesmith",
+	favNum: 17,
+	favSnacks: ["Twin", "Gumm", "Hot"],
+	greeting: function(){
+		console.log("hello")
+	}
+}
+
+function personFile(emp){
+	const employeKey = Object.key()
+}
+
 
 
 

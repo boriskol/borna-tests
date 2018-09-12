@@ -87,5 +87,43 @@ function showraw(strings, ...values){
 }
 showraw`Thanks\nWorld for your purchase, ${name}! Your product cost was ${amt1}, which with tax comes out to ${amt2}`
 
+function lastLetter(word) {
+  //your code goes here...
+  var lastChar = word[word.length -1];
+  return lastChar
+}
+
+//Uncomment the lines below to test your code
+
+console.log(lastLetter("hello")); //=> "o"
+// console.log(lastLetter("goodbye!")); //=> "!"
+// console.log(lastLetter("ZeltoiD")); //=> "D"
+// console.log(lastLetter("I love Javascript")); //=> "t"
+
+
+
+function disemvowel(string) {
+  // your code here...
+   //let splitString = string.split('');
+   let vowels = ['a', 'e', 'i', 'o', 'u'];
+   let disemvoweledString = [];
+  
+  for (var i = 0; i < splitString.length; i++) {
+    if (vowels.indexOf(splitString[i]) === -1) {
+      disemvoweledString.push(splitString[i]);
+    }
+  }
+  return disemvoweledString.join('');
+}
+
+//Comment in the code below to test your function:
+
+console.log(disemvowel('CodeSmith')); // => 'CdSmth'
+// console.log(disemvowel('BANANA')); // => 'BNN'
+// console.log(disemvowel('hello world')); // => 'hll wrld'
+
+
+
+
 
 
