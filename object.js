@@ -112,6 +112,12 @@ myObject.a //3
 
 
 
+var obj = {key1: "value1", key2: "value2"};
+var pair = {key3: "value3"};
+obj = {...obj, ...pair};
+
+document.body.innerHTML = JSON.stringify(obj);
+
 
 
 

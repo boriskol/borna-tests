@@ -100,29 +100,6 @@ console.log(oCat.breathing); // 'yes'
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function VehicleA(){
 	this.engines = 1;
 }

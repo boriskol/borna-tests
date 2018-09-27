@@ -529,6 +529,84 @@ use1.increment()
 
 
 
+async function downloadContent(urls) {
+    const promiseArray = urls.map(async (url) => {
+        const content = await httpGet(url);
+        return content;
+    });
+    return await Promise.all(promiseArray);
+}
+
+
+//http://www.b-2-studio.com/musicartistApp/database/getDataFromDatabase.php
+//http://b-2-studio.com/musicartist/getViewsNews.php
+//http://b-2-studio.com/musicartist/getLikeNews.php
+
+
+/*function postRequest(url, data) {
+    return fetch(url, {
+        method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
+        body: data,//JSON.stringify(data), // Coordinate the body type with 'Content-Type'
+        headers: new Headers({
+          'Access-Control-Allow-Origin':'*',
+          'Content-Type': 'application/json'
+        })
+    }).then(response => response.json())
+}*/
+
+/*const join = function(arr, separator = ',', end = separator) {
+    return arr.reduce(
+    (acc, val, i) =>
+      i === arr.length - 2
+        ? acc + val + end
+        : i === arr.length - 1
+          ? acc + val
+          : acc + val + separator,
+    ''
+  )};
+fetch(urlDevice).then(function(response){
+    return response.json();
+}).then(function(data){
+
+    var pm = data.reduce(function(previous, phone) {
+            previous.push(phone.device_id);
+            console.log(phone.device_id)
+            return previous;
+    }, []);
+    console.log(join(pm, ','));
+
+        const ulA = document.getElementById('phones');
+        let li = createNode('div'),
+        p = createNode('span');
+        p.innerHTML = join(pm, ',');
+        p.classList.add("mystyle");
+        append(li, p);
+        append(ulA, li);
+    
+
+}).catch(function(error) {
+    console.log(error);
+}); 
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

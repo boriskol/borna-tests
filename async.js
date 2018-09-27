@@ -30,8 +30,12 @@ add(10).then(v => {
 console.log("-----------async promises and fetch----------------");
 
 let urlV = "https://b-2-studio.com/musicartist/getAllNews.php";
-let urlD = "https://b-2-studio.com/PushNotificationiOS/getstorePurches.php";
-function getNews(){
+let urlL = "http://b-2-studio.com/musicartist/getLikeNews.php";
+let urlF = "http://www.b-2-studio.com/musicartistApp/database/getDataFromDatabase.php";
+//http://www.b-2-studio.com/musicartistApp/database/getDataFromDatabase.php
+//http://b-2-studio.com/musicartist/getViewsNews.php
+//http://b-2-studio.com/musicartist/getLikeNews.php
+function getNewsViews(){
   return fetch(urlV, {
     headers: {
       'Content-Type': 'application/json',
@@ -40,8 +44,16 @@ function getNews(){
   }).then((response) => response.json())
 };
 
-function getPhoness(){
-  return fetch(urlD, {
+function getNewsLikes(){
+  return fetch(urlL, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }
+  }).then((response) => response.json())
+};
+function getFeatured(){
+  return fetch(urlF, {
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
@@ -51,8 +63,8 @@ function getPhoness(){
 
 // Request both students and scores in parallel and return a Promise for both values.
 // `Promise.all` returns a new Promise that resolves when all of its arguments resolve.
-function getNewsandPhones(){
-  return Promise.all([getNews(), getPhoness()])
+function getNewsandVideo(){
+  return Promise.all([getFeatured(), getNewsViews(), getNewsLikes()])
 }
 
 // When this Promise resolves, both values will be available.
@@ -62,13 +74,13 @@ function getNewsandPhones(){
 })*/
 
 var add = async function() { // async function expression assigned to a variable
-  var a = await getNewsandPhones()
+  var a = await getNewsandVideo()
   return a;
 };
 
-add().then(([students, scores]) => {
+add().then(([video, views, loves]) => {
     // both have loaded!
-    console.log(students, scores);
+    console.log(video, views, loves);
 })
 
 
