@@ -527,7 +527,7 @@ use1.increment()
    </body>
 </html>
 
-
+/*
 
 async function downloadContent(urls) {
     const promiseArray = urls.map(async (url) => {
@@ -536,7 +536,7 @@ async function downloadContent(urls) {
     });
     return await Promise.all(promiseArray);
 }
-
+*/
 
 //http://www.b-2-studio.com/musicartistApp/database/getDataFromDatabase.php
 //http://b-2-studio.com/musicartist/getViewsNews.php
