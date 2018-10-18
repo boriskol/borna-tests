@@ -34,13 +34,13 @@ function outer(){
     //Scope C --> counter is accessible here
    // var counter = 0; //if we define here will always be 1 because we are defining it in this execution context
     counter++;
-    console.log(counter);
+    //console.log(counter);
     return counter;
   }
   return incrementCounter;
 }
 var myNewFunc = outer();
-myNewFunc();
+console.log(myNewFunc());
 myNewFunc();
 
 var anotherFunc = outer();
