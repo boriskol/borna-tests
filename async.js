@@ -66,13 +66,6 @@ function getFeatured(){
 function getNewsandVideo(){
   return Promise.all([getFeatured(), getNewsViews(), getNewsLikes()])
 }
-
-// When this Promise resolves, both values will be available.
-/*getNewsandPhones().then(([students, scores]) => {
-    // both have loaded!
-    console.log(students, scores);
-})*/
-
 var add = async function() { // async function expression assigned to a variable
   var a = await getNewsandVideo()
   return a;
