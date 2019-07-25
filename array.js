@@ -1,3 +1,10 @@
+function average(a, b) {
+  return a + b / 2;
+}
+
+console.log(average(2, 1));
+
+
 var items = [
   { name: 'Edward', value: 21 },
   { name: 'Sharpe', value: 37 },
@@ -35,7 +42,7 @@ const allEqual = function(arr){
   return arr.every(function(val){
     return val === arr[0];
   })
-} 
+}
 allEqual([1, 2, 3, 4, 5, 6]); // false
 allEqual([1, 1, 1, 1]); // true
 
@@ -86,7 +93,7 @@ const chunk = (arr, size) => Array.from({ length: Math.ceil(arr.length / size) }
   return Array.from(function( {length: Math.ceil(arr.length / size) }, (v, i) ){
       return arr.slice(i * size, i * size + size);
   })
-}*/                   
+}*/
 chunk([1, 2, 3, 4, 5], 2); // [[1,2],[3,4],[5]]
 
 //Removes falsey values from an array.
@@ -207,7 +214,7 @@ dropWhile([1, 2, 3, 4], n => n >= 3); // [3,4]
 //Returns every nth element in an array.
 const everyNth = (arr, nth) => arr.filter((e, i) => i % nth === nth - 1);
 const everyNth = function(arr, nth){
-  return arr.filter(function(e, i){ 
+  return arr.filter(function(e, i){
     return i % nth === nth - 1
   })
 }
@@ -243,7 +250,7 @@ filterNonUniqueBy(
 ); // [ { id: 2, value: 'c' } ]
 
 //Returns the last element for which the provided function returns a truthy value.
-//The pop() method removes the last element from an array and returns that element. 
+//The pop() method removes the last element from an array and returns that element.
 function compare(n){
   return n % 2 === 1
 }
@@ -256,7 +263,7 @@ const findLast = function(arr, fn){
 findLast([1, 2, 3, 4], compare );
 
 
-const findLastIndex = (arr, fn) => 
+const findLastIndex = (arr, fn) =>
   arr.map((val, i) => [i, val]).filter(([i, val]) => fn(val, i, arr)).pop()[0];
 findLastIndex([1, 2, 3, 4], n => n % 2 === 1); // 2 (index of the value 3)
 
@@ -285,7 +292,7 @@ const groupBy = (arr, fn) =>
     return acc;
   }, {});
 /*const groupBy = function(arr, fn){
-  return arr.map(typeof fn === 'function' ? fn : function(val){ 
+  return arr.map(typeof fn === 'function' ? fn : function(val){
     return val[fn].reduce(function(acc, val, i){
       acc[val] = (acc[val] || []).concat(arr[i]);
       return acc;
@@ -317,11 +324,11 @@ indexOfAll([1, 2, 3], 4); // []
 const initial = arr => arr.slice(0, -1);
 const initial = function(arr){
   return arr.slice(0, -1);
-} 
+}
 initial([1, 2, 3]); // [1,2]
 
 
-//Initializes an array containing the numbers in the specified 
+//Initializes an array containing the numbers in the specified
 //range where start and end are inclusive with their common difference step.
 const initializeArrayWithRange = (end, start = 0, step = 1) =>
   Array.from({ length: Math.ceil((end - start + 1) / step) }, (v, i) => i * step + start);
@@ -333,17 +340,17 @@ const initializeArrayWithRange = function(end, start = 0, step = 1){
 initializeArrayWithRange(5); // [0,1,2,3,4,5]
 initializeArrayWithRange(7, 3); // [3,4,5,6,7]
 initializeArrayWithRange(9, 0, 2); // [0,2,4,6,8]
-//Initializes an array containing the numbers in the specified range (in reverse) 
+//Initializes an array containing the numbers in the specified range (in reverse)
 //where start and end are inclusive with their common difference step.
 const initializeArrayWithRangeRight = (end, start = 0, step = 1) =>
   Array.from({ length: Math.ceil((end + 1 - start) / step) }).map(
     (v, i, arr) => (arr.length - i - 1) * step + start
   );
 const initializeArrayWithRangeRight = function(end, start = 0, step = 1){
-  return Array.from({ length: Math.ceil((end + 1 - start) / step) }).map(function(v, i, arr) { 
+  return Array.from({ length: Math.ceil((end + 1 - start) / step) }).map(function(v, i, arr) {
     return (arr.length - i - 1) * step + start
   });
-} 
+}
 initializeArrayWithRangeRight(5); // [5,4,3,2,1,0]
 initializeArrayWithRangeRight(7, 3); // [7,6,5,4,3]
 initializeArrayWithRangeRight(9, 0, 2); // [8,6,4,2,0]
@@ -377,7 +384,7 @@ const intersection = function(a, b){
 }
 intersection([1, 2, 3], [4, 3, 2]); // [2,3]
 
-//Returns a list of elements that exist in both arrays, 
+//Returns a list of elements that exist in both arrays,
 //after applying the provided function to each array element of both.
 const intersectionBy = (a, b, fn) => {
   const s = new Set(b.map(x => fn(x)));
@@ -396,7 +403,7 @@ const intersectionWith = function(a, b, comp){
 }
 intersectionWith([1, 1.2, 1.5, 3, 0], [1.9, 3, 0, 3.9], (a, b) => Math.round(a) === Math.round(b)); // [1.5, 3, 0]
 
-//Returns 1 if the array is sorted in ascending order, 
+//Returns 1 if the array is sorted in ascending order,
 //-1 if it is sorted in descending order or 0 if it is not sorted.
 const isSorted = arr => {
   let direction = -(arr[0] - arr[1]);
@@ -416,7 +423,7 @@ isSorted([0, 1, 2, 2]); // 1
 isSorted([4, 3, 2]); // -1
 isSorted([4, 3, 5]); // 0
 
-//Joins all elements of an array into a string 
+//Joins all elements of an array into a string
 //and returns this string. Uses a separator and an end separator.
 const join = (arr, separator = ',', end = separator) =>
   arr.reduce(
@@ -432,7 +439,7 @@ join(['pen', 'pineapple', 'apple', 'pen'], ',', '&'); // "pen,pineapple,apple&pe
 join(['pen', 'pineapple', 'apple', 'pen'], ','); // "pen,pineapple,apple,pen"
 join(['pen', 'pineapple', 'apple', 'pen']); // "pen,pineapple,apple,pen"
 
-//Converts an array of objects to a 
+//Converts an array of objects to a
 //comma-separated values (CSV) string that contains only the columns specified.
 const JSONtoCSV = (arr, columns, delimiter = ',') =>
   [
@@ -467,7 +474,7 @@ longestItem([1, 2, 3], [1, 2], [1, 2, 3, 4, 5]); // [1, 2, 3, 4, 5]
 longestItem([1, 2, 3], 'foobar'); // 'foobar'
 
 
-//Maps the values of an array to an object using a 
+//Maps the values of an array to an object using a
 //function, where the key-value pairs consist of the original value as the key and the mapped value.
 const mapObject = (arr, fn) =>
   (a => (
@@ -484,8 +491,8 @@ const squareIt = arr => mapObject(arr, a => a * a);
 squareIt([1, 2, 3]); // { 1: 1, 2: 4, 3: 9 }
 
 
-//Returns the n maximum elements from the provided array. If n is greater 
-//than or equal to the provided array's length, 
+//Returns the n maximum elements from the provided array. If n is greater
+//than or equal to the provided array's length,
 //then return the original array(sorted in descending order).
 const maxN = (arr, n = 1) => [...arr].sort((a, b) => b - a).slice(0, n);
 // sort ascd //const maxN = (arr, n = 1) => [...arr].sort((a, b) => a - b).slice(0, n);
@@ -493,7 +500,7 @@ maxN([1, 2, 3]); // [3]
 maxN([1, 2, 3], 2); // [3,2]
 
 
-//Returns true if the provided predicate function 
+//Returns true if the provided predicate function
 //returns false for all elements in a collection, false otherwise.
 const none = (arr, fn = Boolean) => !arr.some(fn);
 none([0, 1, 3, 0], x => x == 2); // true
@@ -587,7 +594,7 @@ const pullAtValue = function(arr, pullArr){
     //console.log(v)
     return (pullArr.includes(v) ? removed.push(v) : v)
   }),
-  mutateTo = arr.filter(function(v, i) { 
+  mutateTo = arr.filter(function(v, i) {
     //console.log(v)
     return !pullArr.includes(v)
   });
@@ -729,44 +736,6 @@ const unary = fn => val => fn(val);
 /*const unary = function(fn){
   return function(val){
     return fn(val);
-  } 
+  }
 } */
 ['6', '8', '10'].map(unary(parseInt)); // [6, 8, 10]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
