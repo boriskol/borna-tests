@@ -477,14 +477,23 @@ function count(a,name){
 }
 const deepFlatten = function(arr){
   return [].concat(...arr.map(function(v){
-    return v;//(Array.isArray(v) ? deepFlatten(v) : v)
+    let newArr = (Array.isArray(v) ? deepFlatten(v) : v)
+    return newArr;
   }))
 }
 let deepF = deepFlatten(["apple", ["banana"], [["apple"], "jabuka"], "kruska"]); // [1,2,3,4,5]
 console.log(deepF)
-var dfr = deepF.reduce((map, value) => {
+let dfr = deepF.reduce((map, value) => {
   map[value] = (map[value] || 0) + 1;
   return map
 },{})
 console.log(dfr)
-console.log(count(deepF, "apple"));
+let numOF = count(deepF, "apple")
+console.log(numOF);
+
+
+
+
+
+
+////fuck
