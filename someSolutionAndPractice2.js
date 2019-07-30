@@ -490,10 +490,37 @@ let dfr = deepF.reduce((map, value) => {
 console.log(dfr)
 let numOF = count(deepF, "apple")
 console.log(numOF);
-
-
+/*
+var testingString = "USA Australia UK"
+console.log(testingString.split())
+function demethodize(methode){
+  return function(){
+    return Function.prototype.call.apply(method, arguments)
+  }
+}
+var demethSplit = demethodize(String.prototype.split);
+console.log(demethSplit(testingString))
+*/
 
 
 
 
 ////fuck
+
+const nums = [1, 2, 3]
+var getMaxNumberFromArray = function (arr) {return Math.max.apply(null, arr);};
+var getMinNumberFromArray = function (arr) {return Math.min.apply(null, arr);};
+console.log(getMaxNumberFromArray)
+console.log(getMinNumberFromArray)
+
+
+var calc = {
+    multiply: function (a, b) {
+    return a * b;
+  }
+    ,multiplyResultA: function () {
+    return [].reduce.call(arguments, this.multiply)
+  }
+};
+var partFunc = calc.multiplyResultA.bind(calc, 1 , 2, 3); // Returns 6 = ( 1 * 3 * 2 )
+console.log(partFunc)
