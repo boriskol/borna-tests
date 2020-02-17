@@ -8,7 +8,7 @@ numbers.sum()
 
 //https://www.discogs.com/artist/7662263-Borna-Libertines
 
-// Complete the compareTriplets function below.
+
 func compareTriplets(a: [Int], b: [Int]) -> [Int] {
 
   var total = [0,0]
@@ -28,5 +28,10 @@ genres = {
 }
 
 //user-follow-modify
-
 SPTAuthUserReadEmailScope
+
+
+ synth punk, garage psych, chamber psych
+  cyberpunk, big beat
+
+  electronic, postpunk, avangard, synth punk, garage psych,  cyberpunk, big beat
