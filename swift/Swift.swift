@@ -35,3 +35,9 @@ SPTAuthUserReadEmailScope
   cyberpunk, big beat
 
   electronic, postpunk, avangard, synth punk, garage psych,  cyberpunk, big beat
+
+func aVeryBigSum(ar: [Int]) -> Int {
+
+    let sum = ar.reduce(0, +)
+    return sum
+}
