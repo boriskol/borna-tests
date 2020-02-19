@@ -48,3 +48,30 @@ func diagonalDifference(arr: [[Int]]) -> Int {
     let difference = abs(primaryDiagonalSum - secondaryDiagonalSum)
     return difference
 }
+
+
+// Complete the plusMinus function below.
+func plusMinus(arr: [Int]) -> Void {
+// Initialize counters
+var positiveCount = 0.0
+var negitiveCount = 0.0
+var zeroCount = 0.0
+// Score integers
+for int in arr {
+    if int > 0 {
+        positiveCount += 1.0
+    } else if int < 0 {
+        negitiveCount += 1.0
+    } else {
+        zeroCount += 1.0
+    }
+}
+var total =  positiveCount + negitiveCount + zeroCount
+// Get fractions
+var percentPositive = positiveCount / total
+var percentNegitive = negitiveCount / total
+var percentZero = zeroCount / total
+
+// Output fractions
+print("\(percentPositive)\n\(percentNegitive)\n\(percentZero)")
+}
