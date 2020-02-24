@@ -180,3 +180,35 @@ func mergeString(a: String, and b: String) -> String {
 let res =  mergeString(a: "abc", and: "def")
 print(res)
 //prints adbecf
+
+
+public enum Result<Success, Failure: Error> {
+    case success(Success), failure(Failure)
+}
+URLSession.shared.dataTask(with: url) { (result: Result<(response: URLResponse, data: Data), Error>) in
+    switch result {
+    case let .success(success):
+
+    case let .error(error):
+
+    }
+}
+assert() code runs only in debug mode, the time when you and writing, debugging development your code. If assert condition is met, your code will crash in debug builds.
+func printAmount(_ amount: Int) {
+    guard amount >= 0 else {
+      assert(amount >= 0, "Amount must be a positive number")
+      return
+    }
+    print("Amount is: ", amount)
+  }
+
+printAmount(-2)
+
+enum Direction: CaseIterable {
+    case north
+    case south
+    case east
+    case west
+}
+Direction.allCases //[north, south, east, west]
+Direction.allCases.count //4
