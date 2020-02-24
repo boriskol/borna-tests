@@ -212,3 +212,13 @@ enum Direction: CaseIterable {
 }
 Direction.allCases //[north, south, east, west]
 Direction.allCases.count //4
+
+let numbers = [1, 2, 3, 4]
+let numberSum = numbers.reduce(0, { $0 + $1})
+
+DispatchQueue.global(qos: .default).async {
+    sleep(10)
+    DispatchQueue.main.async {
+        self.alert.text = "Waiting over"
+    }
+}
