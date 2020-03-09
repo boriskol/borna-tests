@@ -514,3 +514,28 @@ UIView.animate(withDuration: 2.5) {
     self.view.backgroundColor = .orange
 }
 UIView.animate(withDuration: 2.5, self.view.backgroundColor = .orange)
+
+
+func staircase(n: Int) -> Void {
+    var stairs = String()
+    // iterate over range of 1 and n
+    for step in (1...n).reversed() {
+        // repeat \s and # accordingly
+        stairs += String(repeating: " ", count: step - 1) + String(repeating: "#", count: n + 1 - step) + "\n"
+    }
+    print(stairs)
+
+}
+/*
+#
+
+##
+
+###
+
+####
+
+#####
+
+######
+*/
