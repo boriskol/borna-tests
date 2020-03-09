@@ -238,3 +238,33 @@ extension Array where Element: Equatable {
     }
 
 }
+
+// Closure take no parameter and return nothing
+let sayHello: () -> Void = {
+    print("Hello")
+}
+
+sayHello()
+
+// Closure take one parameter and return 1 parameter
+let value: (Int) -> Int = { (value1) in
+    return value1
+}
+
+print(value(5))
+
+// Closure take two parameter and return 1 parameter
+let add: (Int, Int) -> Int = { (value1, value2) in
+    return value1 + value2
+}
+
+print(add(5, 4))
+
+// Closure take two parameter and return String parameter
+let addValues: (Int, Int) -> String = { (value1, value2) -> String in
+    return String("Sum is: \(value1 + value2)")
+}
+
+print(addValues(5, 4))
+
+//Trailing Closure
