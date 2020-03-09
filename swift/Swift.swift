@@ -480,3 +480,37 @@ class Human {
 var humanObj: Human? = Human(firstName: Borna, lastName: libertines)
 let fullName = humanObj?.fullName("Mr")
 humanObj = nil
+
+
+
+var customersInLine = [“Chris”, “Alex”, “Ewa”, “Barry”, “Daniella”]
+print(customersInLine.count)
+// Prints “5”
+let customerProvider = { customersInLine.remove(at: 0) }
+// this is of type ()->String
+print(customerProvider()) // prints Chris.. the remove(at:) returns a String.
+
+func serve(customer customerProvider: () -> String) {
+  print("Now serving \(customerProvider())!")
+}
+serve(customer: { customersInLine.remove(at: 0) } ) // we cannot omit {}
+// Prints "Now serving Alex!"
+
+//@autoclosure
+func serve(customer customerProvider: @autoclosure () -> String) {
+  print("Now serving \(customerProvider())!")
+}
+serve(customer: customersInLine.remove(at: 0))// Prints "Now serving Ewa!"
+
+
+extension UIView {
+
+class func animate(withDuration duration: TimeInterval, _ animations: @escaping @autoclosure () -> Void) {
+        UIView.animate(withDuration: duration, animations: animations)
+    }
+
+}
+UIView.animate(withDuration: 2.5) {
+    self.view.backgroundColor = .orange
+}
+UIView.animate(withDuration: 2.5, self.view.backgroundColor = .orange)
