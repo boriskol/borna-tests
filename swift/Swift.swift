@@ -334,3 +334,128 @@ class CaptureList: NSObject {
 }
 
 CaptureList()
+
+
+let inferredClosure = {(x:Int,y:Int)->Int in x + y }inferredClosure(1,99) // result is 100
+
+let inferredReturnTypeClosure = {(number:Int) in number*number }
+
+let callStringWtihClosure: () -> String = { () in return “hello”}
+print(callStringWtihClosure()) // prints “hello”
+
+let callStringWtihClosure: () -> String = {return “hello”}
+
+let callStringWithClosureWithoutType = { “hi, I’m a closure too” }
+
+// return a closure from a function
+var addClosure:(Int,Int)->Int = { $0 + $1 }
+func returnClosure() -> (Int,Int)->Int {return addClosure}
+//returnClosure()(10,20)
+// returns 30
+var returnedClosure = returnClosure()
+// returns a closure of type (Int,Int)->Int
+returnedClosure(20,10) // returns 30
+
+let setupViewUsingClosure = { () -> UIView inlet view = UIView()view.backgroundColor = .greenreturn view}
+let someOtherView = setupViewUsingClosure() // returns a green view
+
+let setupViewUsingClosure: UIView = {let view = UIView()view.backgroundColor = .greenreturn view}()
+
+
+func doSomething(number:Int,onSuccess closure:(Int)->Void) {
+  closure(number * number * number)
+}
+  doSomething(number: 100) { (numberCube) in
+  print(numberCube) // prints  1000000
+  }
+
+
+  // capturing values
+  var i = 0
+  var closureArray = [()->()]()
+  for _ in 1…5 {
+  closureArray.append {
+    print(i)
+  }
+    i += 1
+    }
+    // here i will be 5
+    closureArray[0]() // prints 5
+    closureArray[1]() // prints 5
+    closureArray[2]() // prints 5
+    closureArray[3]() // prints 5
+    closureArray[4]() // prints 5
+
+
+    var closureArray2 = [()->()]()
+    var j = 0for _ in 1…5 {
+    closureArray2.append { [j] in
+    print(j)
+    }
+    j += 1
+    }// here i will be 5
+    closureArray2[0]() // prints 0
+    closureArray2[1]() // prints 1
+    closureArray2[2]() // prints 2
+    closureArray2[3]() // prints 3
+    closureArray2[4]() // prints 4
+
+    closure.append { [j,k,l] inprint("\(j) \(k) \(l)")}
+    closure.append { [a = j, b = k, c = l] in
+    print("\(j) \(k) \(l)")
+    }
+
+    An escaping closure is a closure that’s called after the function it was passed to returns. In other words, it outlives the function it was passed to.
+A non-escaping closure is a closure that’s called within the function it was passed into, i.e. before it returns.
+
+
+func someFunctionWithNonescapingClosure(closure: () -> Void) {closure()}
+func someFunctionWithEscapingClosure(completionHandler: @escaping () -> Void) {completionHandler()}
+class SomeClass {
+var x = 10
+func doSomething() {
+someFunctionWithEscapingClosure { self.x = 100 }
+someFunctionWithNonescapingClosure { x = 200 }
+}
+}
+
+
+
+
+class InterviewTest {
+var name: String = “Abhilash”
+lazy var greeting : String = {return “Hello \(self.name)”}()
+}
+//-------------------------
+let testObj = InterviewTest()testObj.greeting // result is Hello Abhilash
+
+The lazy var greeting is returning a string by accessing the local variable name from the class InterviewTest . We cannot directly access the variable. We have to use self keyword to do that. But as explained, by default, a closure keeps a strong reference of the variable captured. It may cause reference cycles.
+
+    We can break this strong reference cycle using self in the capture list with either a weak or an unowned reference.
+
+weak
+
+A weak reference is a reference that does not keep a strong hold on the instance it refers to, and so does not stop ARC from disposing of the referenced instance. This behavior prevents the reference from becoming part of a strong reference cycle.
+
+Since a weak reference may be nil, the variable captured becomes optional. Therefore, we should use a guard to safely unwrap it:
+
+lazy var greeting : String = { [weak self] in
+guard let strongSelf = self else { return “” }
+return “Hello \(strongSelf.name)”
+}()
+
+Unowned
+
+Like a weak reference, an unowned reference does not keep a strong hold on the instance it refers to. Unlike a weak reference, however, an unowned reference is used when the other instance has the same lifetime or a longer lifetime
+
+lazy var greeting : String = { [unowned self] in
+return “Hello \(self.name)”
+}()
+
+This means that we should use unowned just when we are sure that the reference will never be nilinside the closure, otherwise the app would crash. So, guard check is not required here.
+
+We can use weak and unowned with any variable in the capture list and we can also combine with the aliases:
+
+lazy var greeting : String = { [unowned unownedSelf = self] in
+ return “Hello \(unownedSelf.name)”
+}()
