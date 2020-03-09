@@ -459,3 +459,24 @@ We can use weak and unowned with any variable in the capture list and we can als
 lazy var greeting : String = { [unowned unownedSelf = self] in
  return “Hello \(unownedSelf.name)”
 }()
+
+class Human {
+  var firstName: String
+  var lastName: String
+  lazy var fullName:(String) -> String = { [unowned self] titlePrefix in
+    return "\(titlePrefix).\(firstName) \(lastName)"
+
+  }
+  init(firstName: String, var lastName: String){
+    self.firstName = firstName
+    self.lastName = lastName
+  }
+  deimy{
+    print("de-allocating the human obj")
+
+  }
+}
+
+var humanObj: Human? = Human(firstName: Borna, lastName: libertines)
+let fullName = humanObj?.fullName("Mr")
+humanObj = nil
