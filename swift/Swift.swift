@@ -268,3 +268,69 @@ let addValues: (Int, Int) -> String = { (value1, value2) -> String in
 print(addValues(5, 4))
 
 //Trailing Closure
+//Closure as an argument to method call
+func makeSquareOf(digit: Int, onComplition:(Int) -> Void ){
+  let squaredig = digit * digit
+  onComplition(squaredig)
+}
+makeSquareOf(digit: 10, onComplition: { square in
+  print("Square 10 is \(square)")
+})
+
+//
+let digitsList = [1, 2, 3, 4, 5]
+
+let sum = digitsList.reduce(0) { $0 + $1 }
+print(sum)
+
+//Capturing Values
+func makeIncrementer(forIncrement amount: Int) -> () -> Int {
+    var runningTotal = 0
+    func incrementer() -> Int {
+        runningTotal += amount
+        return runningTotal
+    }
+    return incrementer
+}
+let incrementByTen = makeIncrementer(forIncrement: 10)
+incrementByTen() // returns a value of 10
+incrementByTem() // returns  a value of 20
+
+class CaptureList: NSObject {
+    let digit = 5
+
+    override init() {
+        super.init()
+
+        makeSquareOfValue { [digit] squareDigit in
+            print("Square of \(digit) is \(squareDigit)")
+        }
+    }
+
+    func makeSquareOfValue(onCompletion: (Int) -> Void) {
+        let squareDigit = digit * digit
+        onCompletion(squareDigit)
+    }
+}
+
+CaptureList()
+
+class CaptureList: NSObject {
+    let digit = 5
+    typealias onCompletionHandler = (Int) -> Void
+
+    override init() {
+        super.init()
+
+        makeSquareOfValue { [digit] squareDigit in
+            print("Square of \(digit) is \(squareDigit)")
+        }
+    }
+
+    func makeSquareOfValue(onCompletion: onCompletionHandler) {
+        let squareDigit = digit * digit
+        onCompletion(squareDigit)
+    }
+}
+
+CaptureList()
