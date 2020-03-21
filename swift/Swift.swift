@@ -549,3 +549,34 @@ func miniMaxSum(arr: [Int]) -> Void {
     print("\(minSum) \(maxSum)")
 
 }
+
+
+// DispatchGroup
+func myFunction() {
+    let array = [Object]()
+    let group = DispatchGroup() // initialize
+
+    array.forEach { obj in
+
+        // Here is an example of an asynchronous request which use a callback
+        group.enter() // wait
+        LogoRequest.init().downloadImage(url: obj.url) { (data) in
+            if (data) {
+                group.leave() // continue the loop
+            }
+        }
+    }
+
+    group.notify(queue: .main) {
+        // do something here when loop finished
+    }
+}
+
+// long running operation
+func longRunningOp(searchString: String, completion: (result: String) -> Void) {
+    // call the completion handler/callback function
+    completion(searchOp.result)
+}
+longRunningOp(searchString) {(result: String) in
+    // do something with result
+}
