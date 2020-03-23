@@ -580,3 +580,13 @@ func longRunningOp(searchString: String, completion: (result: String) -> Void) {
 longRunningOp(searchString) {(result: String) in
     // do something with result
 }
+
+
+
+func birthdayCandles(ar: [Int]) -> Int {
+
+    let max = ar.max()
+    let count =  ar.filter{ $0 == max }.count
+
+    return count
+}
