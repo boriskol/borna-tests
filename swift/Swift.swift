@@ -542,12 +542,10 @@ func staircase(n: Int) -> Void {
 
 func miniMaxSum(arr: [Int]) -> Void {
     let sorted = arr.sorted()
-
     let minSum = sorted.dropLast().reduce(0, +)
     let maxSum = sorted.dropFirst().reduce(0, +)
 
     print("\(minSum) \(maxSum)")
-
 }
 
 
@@ -584,10 +582,8 @@ longRunningOp(searchString) {(result: String) in
 
 
 func birthdayCandles(ar: [Int]) -> Int {
-
     let max = ar.max()
     let count =  ar.filter{ $0 == max }.count
-
     return count
 }
 
