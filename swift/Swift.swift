@@ -279,7 +279,6 @@ makeSquareOf(digit: 10, onComplition: { square in
 
 //
 let digitsList = [1, 2, 3, 4, 5]
-
 let sum = digitsList.reduce(0) { $0 + $1 }
 print(sum)
 
